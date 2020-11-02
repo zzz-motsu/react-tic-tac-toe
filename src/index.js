@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import styled from 'styled-components';
 import './index.css';
 
 function Square(props) {
@@ -16,6 +17,7 @@ class Board extends React.Component {
     this.state = {
       squares: Array(9).fill(null),
       xIsNext: true,
+      handCount: 0,
     };
   }
 
@@ -28,6 +30,7 @@ class Board extends React.Component {
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
+      handCount: this.state.handCount +1,
     });
   }
 
@@ -45,13 +48,51 @@ class Board extends React.Component {
     let status;
     if (winner) {
       status = 'Winner: ' + winner;
-    } else {
-      status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+    } else if(this.state.handCount === 9){
+      status = "draw"
+    } else{
+      // status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
+      status = "processing"
     }
+    
 
+
+    const CHAR = styled.div`
+      border-bottom: 3px solid black;
+      `;
+
+    const Container = styled.div`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    `;
+
+    const Header = styled.div`
+      padding: 16px;
+    `;
+
+    const Title = styled.h1`
+      text-align: center;
+    `;
+
+    const Footer = styled.div`
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    `;
+
+    console.log(this.state)
     return (
+      <Container>
       <div>
-        <div className="status">{status}</div>
+        <Header><Title>Tic Tac Toe</Title>
+        <div className="turn">
+          <div className="circle"><CHAR>O</CHAR></div>
+          <div className="cross">X</div>
+          </div>
+        </Header>
         <div className="board-row">
           {this.renderSquare(0)}
           {this.renderSquare(1)}
@@ -67,7 +108,11 @@ class Board extends React.Component {
           {this.renderSquare(7)}
           {this.renderSquare(8)}
         </div>
+        <Footer>
+          <div className="status">{status}</div>
+        </Footer>
       </div>
+      </Container>
     );
   }
 }
@@ -99,6 +144,7 @@ function calculateWinner(squares) {
     [0, 4, 8],
     [2, 4, 6],
   ];
+  
   for (let i = 0; i < lines.length; i++) {
     const [a, b, c] = lines[i];
     if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {

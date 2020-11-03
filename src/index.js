@@ -18,6 +18,7 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
       xIsNext: true,
       handCount: 0,
+      active: true,
     };
   }
 
@@ -26,7 +27,7 @@ class Board extends React.Component {
     if (calculateWinner(squares) || squares[i]) {
       return;
     }
-    squares[i] = this.state.xIsNext ? 'X' : '○';
+    squares[i] = this.state.xIsNext ? '○' : 'X';
     this.setState({
       squares: squares,
       xIsNext: !this.state.xIsNext,
@@ -55,11 +56,19 @@ class Board extends React.Component {
       status = "processing"
     }
     
+    // const ACTIVE_CLASSNAME = 'active'
 
+    // if(this.state.xIsNext) {
+    //   circleElement.classList.remove(ACTIVE_CLASSNAME)
+    //   crossElement.classList.add(ACTIVE_CLASSNAME)
+    // } else {
+    //   circleElement.classList.add(ACTIVE_CLASSNAME)
+    //   crossElement.classList.remove(ACTIVE_CLASSNAME)
+    // }
 
-    const CHAR = styled.div`
-      border-bottom: 3px solid black;
-      `;
+    // const CHAR = styled.div`
+    //   border-bottom: 3px solid black;
+    //   `;
 
     const Container = styled.div`
       display: flex;
@@ -83,15 +92,26 @@ class Board extends React.Component {
       justify-content: center;
     `;
 
+    // const CHAR = Object.freeze({
+    //   circle: '○',
+    //   crosse: '×',
+    // });
+
     console.log(this.state)
     return (
       <Container>
       <div>
         <Header><Title>Tic Tac Toe</Title>
         <div className="turn">
-          <div className="circle"><CHAR>O</CHAR></div>
-          <div className="cross">X</div>
-          </div>
+          <div className={`
+            ${this.state.xIsNext ? 'active': '' }
+            `}
+            >O</div>
+          <div className={`
+            ${!this.state.xIsNext ? 'active': '' }
+            `}
+            >X</div>
+        </div>
         </Header>
         <div className="board-row">
           {this.renderSquare(0)}

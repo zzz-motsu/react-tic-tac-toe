@@ -19,9 +19,9 @@ ol, ul {
   font-size: 1.2rem;
 }
 
-/* .circle {
-  border-bottom: 3px solid black;;
-} */
+.active{
+  border-bottom: 3px solid black;
+}
 
 .board-row:after {
   clear: both;

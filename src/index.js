@@ -18,7 +18,6 @@ class Board extends React.Component {
       squares: Array(9).fill(null),
       xIsNext: true,
       handCount: 0,
-      active: true,
     };
   }
 
@@ -52,24 +51,9 @@ class Board extends React.Component {
     } else if(this.state.handCount === 9){
       status = "draw"
     } else{
-      // status = 'Next player: ' + (this.state.xIsNext ? 'X' : 'O');
       status = "processing"
     }
     
-    // const ACTIVE_CLASSNAME = 'active'
-
-    // if(this.state.xIsNext) {
-    //   circleElement.classList.remove(ACTIVE_CLASSNAME)
-    //   crossElement.classList.add(ACTIVE_CLASSNAME)
-    // } else {
-    //   circleElement.classList.add(ACTIVE_CLASSNAME)
-    //   crossElement.classList.remove(ACTIVE_CLASSNAME)
-    // }
-
-    // const CHAR = styled.div`
-    //   border-bottom: 3px solid black;
-    //   `;
-
     const Container = styled.div`
       display: flex;
       align-items: center;
@@ -92,12 +76,7 @@ class Board extends React.Component {
       justify-content: center;
     `;
 
-    // const CHAR = Object.freeze({
-    //   circle: '○',
-    //   crosse: '×',
-    // });
-
-    console.log(this.state)
+    // console.log(this.state)
     return (
       <Container>
       <div>

@@ -129,7 +129,7 @@ export default class Board extends React.Component {
     return (
       <Container>
       <div>
-        <Header><Title> Tac Toe</Title>
+        <Header><Title>Tic Tac Toe</Title>
         <Turn>
           <div className={`
             ${this.state.xIsNext ? 'active': '' }

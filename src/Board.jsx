@@ -138,7 +138,7 @@ export default class Board extends React.Component {
           <div className={`
             ${!this.state.xIsNext ? 'active': '' }
             `}
-            >X</div>
+            >✕</div>
         </Turn>
         </Header>
         <BoardRow>
